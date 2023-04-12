@@ -22,8 +22,8 @@ public class Client {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long clientId;
 
-  @Column(name = "createData")
-  private LocalDate createData;
+  @Column(name = "createDate")
+  private LocalDate createDate;
 
   @Column(name = "name")
   private String name;
@@ -34,21 +34,21 @@ public class Client {
   @Column(name = "email")
   private String email;
 
-  @Column(name = "latitude")
-  private double latitude;
+  @Column(name = "address")
+  private String address;
 
-  @Column(name = "longitude")
-  private double longitude;
+  @Column(name = "address2")
+  private String address2;
+  
+  @Column(name = "city")
+  private String city;
 
-  @Column(name = "addressComplement")
-  private String addressComplement;
+  @Column(name = "state")
+  private String state;
 
-  @Column(name = "description")
-  private String description;
+  @Column(name = "zip")
+  private String zip;
 
-  @Column(name = "identity")
-  private String identity;
-
-  @Column(name = "addressId")
-  private Long addressId;
+  @Column(name = "country")
+  private String country;
 }

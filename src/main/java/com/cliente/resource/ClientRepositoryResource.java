@@ -1,5 +1,6 @@
 package com.cliente.resource;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -28,11 +29,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import io.quarkus.panache.common.Sort;
 
-@Path("clients")
+@Path("client")
 @ApplicationScoped
 @Produces("application/json")
 @Consumes("application/json")
-//@RequestScoped
 public class ClientRepositoryResource {
 
     @Inject
@@ -62,10 +62,11 @@ public class ClientRepositoryResource {
             throw new WebApplicationException("Name was invalidly set on request.", 422);
         }
 
-        if (clientRepository.findByIdentity(client.getIdentity())) {
-            throw new WebApplicationException("Client with Identity of " + client.getIdentity() + " does exist.", 404);
+        if (clientRepository.findByIdentity(client.getName())) {
+            throw new WebApplicationException("Client with Identity of " + client.getName() + " does exist.", 404);
         }
 
+        client.setCreateDate(LocalDate.now());
         clientRepository.persist(client);
         return Response.ok(client).status(201).build();
     }
@@ -84,15 +85,15 @@ public class ClientRepositoryResource {
             throw new WebApplicationException("Client with id of " + id + " does not exist.", 404);
         }
 
-
-        entity.setName(client.getName());
+        entity.setName(client.getName());  
         entity.setPhone(client.getPhone());
         entity.setEmail(client.getEmail());
-        entity.setLatitude(client.getLatitude());
-        entity.setLongitude(client.getLongitude());
-        entity.setAddressComplement(client.getAddressComplement());
-        entity.setDescription(client.getDescription());
-        entity.setIdentity(client.getIdentity());
+        entity.setAddress(client.getAddress());
+        entity.setAddress2(client.getAddress2());
+        entity.setCity(client.getCity());
+        entity.setState(client.getState());
+        entity.setZip(client.getZip());
+        entity.setCountry(client.getCountry());
         
         return entity;
     }
