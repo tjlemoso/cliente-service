@@ -62,7 +62,7 @@ public class ClientRepositoryResource {
             throw new WebApplicationException("Name was invalidly set on request.", 422);
         }
 
-        if (clientRepository.findByIdentity(client.getName())) {
+        if (clientRepository.findByName(client.getName()) != null) {
             throw new WebApplicationException("Client with Identity of " + client.getName() + " does exist.", 404);
         }
 

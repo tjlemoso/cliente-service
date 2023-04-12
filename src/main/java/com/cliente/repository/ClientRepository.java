@@ -7,7 +7,7 @@ import com.cliente.model.Client;
 @ApplicationScoped
 public class ClientRepository implements PanacheRepository<Client> {
 
-  public boolean findByIdentity(String identity){
-    return !list("identity = ?1 ", identity).isEmpty();
+  public Client findByName(String name){
+    return find("name", name).firstResult();
   }
 }
